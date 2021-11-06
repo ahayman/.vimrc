@@ -1,191 +1,113 @@
- 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ----------------------
-" VIM configuration file
-" ----------------------
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible
+filetype off " required
 
-" => Vundle required settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
- filetype off                   " required!
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin('~/.vim/plugged/')
 
- set rtp+=~/.vim/bundle/vundle/
- call vundle#rc()
+" GitHub Plugins:
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'ahayman/thesaurus_query.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'sainnhe/gruvbox-material'
+Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-fugitive'
 
- " let Vundle manage Vundle
- " required! 
- Bundle 'gmarik/vundle'
+" Fern
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-git-status.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'LumaKernel/fern-mapping-fzf.vim'
+Plug 'lambdalisue/fern-hijack.vim'
 
- " My Bundles here:
- Bundle 'LaTeX-Box-Team/LaTeX-Box'
- Bundle 'Lokaltog/powerline'
- Bundle 'SirVer/ultisnips'
- Bundle 'altercation/vim-colors-solarized'
- Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
- Bundle 'jnurmine/Zenburn'
- Bundle 'jnwhiteh/vim-golang'
- Bundle 'joelpet/vim-ft-config'
- Bundle 'kien/ctrlp.vim'
- Bundle 'mileszs/ack.vim'
- Bundle 'nathanaelkane/vim-indent-guides'
- Bundle 'sandeepcr529/Buffet.vim'
- Bundle 'scrooloose/nerdcommenter'
- Bundle 'scrooloose/nerdtree'
- Bundle 'scrooloose/syntastic'
- Bundle 'sukima/xmledit'
- Bundle 'tpope/vim-fugitive'
- Bundle 'tpope/vim-repeat'
- Bundle 'tpope/vim-surround'
- Bundle 'tsaleh/vim-matchit'
- Bundle 'vim-scripts/darkspectrum'
- Bundle 'vim-scripts/taglist.vim'
- Bundle 'vim-scripts/repmo.vim'
- Bundle 'wincent/Command-T.git'
- Bundle 'eraserhd/vim-ios.git'
- Bundle 'dylancopeland/fruitstrap.git'
- Bundle 'vim-scripts/kiwi.vim.git'
- " Node.js bundles
- Bundle 'teramako/jscomplete-vim'
- Bundle 'jelera/vim-javascript-syntax.git'
- Bundle 'wavded/vim-stylus.git'
- Bundle 'myhere/vim-nodejs-complete.git'
- Bundle 'guileen/vim-node.git'
- " original repos on github
- Bundle 'tpope/vim-fugitive'
- Bundle 'Lokaltog/vim-easymotion'
- Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
- Bundle 'tpope/vim-rails.git'
- " vim-scripts repos
- Bundle 'L9'
- Bundle 'FuzzyFinder'
- " non github repos
- Bundle 'git://git.wincent.com/command-t.git'
- Bundle 'Valloric/YouCompleteMe.git'
- Bundle 'msanders/cocoa.vim.git'
+" Language Server
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
- " Colors and fonts
- if has("gui_running")
-     colorscheme Twilight
-     set transparency=15
-     set noantialias
- else
-     colorscheme twilight256
- endif
+" All of your Plugins must be added before the following line
+call plug#end()
 
- set guifont=Monaco:h12
-
- " vim-nodejs-complete 
- "let g:nodejs_complete_config = {'js_compl_fn': 'jscomplete#CompleteJS', 'max_node_compl_len': 100}
-
- filetype plugin indent on     " required!
-
-" let mapleader = ","
-" let g:mapleader = ","
-
- " Fast saving
- nmap <leader>w :w!<cr>
-
- let tlist_objc_settings = 'ObjectiveC;i:interface;c:class;m:method;p:property;I:implementation;v:variable;f:function;e:enumeration;M:macro'
- let g:ycm_confirm_extra_conf = 0
- " => General settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible "drop compatibility for Vi 
-set ignorecase "ignore case on searches and everywhere else
-set infercase "make insert-matching preserve the already written characters
-set mouse=a "enable the mouse in compatible terms for all modes
-set number "enable line numbers
-set smartcase "enable case sensitive search if pattern contains upper case
-set wildmenu "show possible completion matches
-set wildmode=list:longest "list all matches and complete to longest common string
-set scrolloff=7 "minimal number of screen lines to keep above/below the cursor 
-set hidden "This will allow you to switch buffers without saving.  Though you have to use 'qall!' to exit all unsaved buffers
-set lazyredraw
-set hlsearch
-set magic
+" Coc
 
 
-syntax on
-" => Indenting
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set autoindent "copy indent from current line when starting a new line
-set tabstop=4 "number of spaces that a <Tab> in the file counts for
-set softtabstop=4 "number of spaces that a <Tab> counts for while performing editing operations
-set shiftwidth=4 "number of spaces to use for each step of (auto)indent
-set expandtab "use the appropriate number of spaces to insert a <Tab>.
-set smarttab "makes a <Tab> in front of a line insert blanks according to 'shiftwidth'
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-json', 'coc-html', 'coc-eslint', 'coc-css', 'coc-markdownlint', 'coc-prisma', 'coc-sourcekit', 'coc-vimlsp', 'coc-sh', 'coc-html-css-support', 'coc-sql', 'coc-yaml' ]
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" Node & Javascript settings
-au FileType javascript set dictionary+=$HOME/.vim/dict/node.dict
+"GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-" Quick Escape
-inoremap jk <Esc>
+"Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
- vnoremap <silent> * :call VisualSelection('f')<CR>
- vnoremap <silent> # :call VisualSelection('b')<CR>
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+    else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+endfunction
 
- " Treat long lines as break lines (useful when moving around in them)
- map j gj
- map k gk
-
-"Move lines of code around
- map <D-j> ddp
- map <D-k> ddkP
- nmap <D-j> mz:m+<cr>`z
- nmap <D-k> mz:m-2<cr>`z
- vmap <D-j> :m'>+<cr>`<my`>mzgv`yo`z
- vmap <D-k> :m'<-2<cr>`>my`<mzgv`yo`z
- vmap <C-c> "*y
-"if has("mac") || has("macunix")
-"    map <D-j> <M-j>
-"    map <D-k <M-k>
-"    nmap <D-j> <M-j>
-"    nmap <D-k> <M-k>
-"    vmap <D-j> <M-j>
-"    vmap <D-k> <M-k>
-"endif
-
- "Disable Highlight
-map <silent> <leader><cr> :noh<cr>
-
- " NERD Tree
-  """"""""""""""""""""""""""""""
-  "Toggle NERD Tree on/off
-  nmap <silent> <F4> :NERDTreeToggle<CR> 
-  "Filter uninteresting files
-  let NERDTreeIgnore = ['\.class$']
-
-"Empyt Lines 
-map <Enter> o<Esc>
-"map <S-Enter> O<Esc>
- "Window Key Mappings
-noremap <silent> <leader>h :wincmd h<cr>
-noremap <silent> <leader>j :wincmd j<cr>
-noremap <silent> <leader>k :wincmd k<cr>
-noremap <silent> <leader>l :wincmd l<cr>
-
-noremap <silent> <leader>cc :close<cr>
-" Move the current window to the right of the main Vim window
-noremap <silent> <leader>ml <C-W>L
-noremap <silent> <leader>mk <C-W>K
-noremap <silent> <leader>mh <C-W>H
-noremap <silent> <leader>mj <C-W>J
-
- "
- " Brief help
- " :BundleList          - list configured bundles
- " :BundleInstall(!)    - install(update) bundles
- " :BundleSearch(!) foo - search(or refresh cache first) for foo
- " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
- "
- " see :h vundle for more details or wiki for FAQ
- " NOTE: comments after Bundle command are not allowed..
 filetype plugin on
+syntax on
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" Fern Settings
+let g:fern#renderer = "nerdfont"
+nnoremap <expr> <D-f> ":Fern . -drawer -toggle\<CR>"
+
+" fzf settings
+set wildignore+=*/.git/*,*/.idea/*,*/.DS_Store,*/node_modules/*,*/dist/*,*/ios/*,*/android/*
+let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")' : [ '<c-t>'], 'AcceptSelection("t")' : ['<cr>', '<2-LeftMouse>'], } " opens in new tab by default
+let g:ctrlp_root_markers = ['.ctrlp']
+let g:ctrlp_map = '<D-p>'
+
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>\<C-y>" : "\<TAB>"
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+
+" Markdown Syntax Folding - useful for outlining
+let g:markdown_folding = 1
+au FileType markdown setlocal foldlevel=99
+
+set wrap linebreak
+autocmd FileType markdown setlocal spell
+set number
+set guitablabel=\[%N\]\ %t\ %M 
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_theme='gruvbox_material'
+let java_ignore_javadoc=1
+
+" Thesaurus Lookup parameters
+let g:tq_merriam_webster_api_key='c65806b9-fb13-42ec-a16b-bd75c80c997a'
+let g:tq_enabled_backends=["merriam_webster", "mthesaur_txt"]
+let g:tq_cache_results=0
+
+nnoremap <D-d> :Goyo<CR>
+nnoremap <leader>fs z=
+nnoremap <C-t> "=strftime('%F %T')<C-M>p
+inoremap <C-t> <C-R>=strftime('%F %T')<CR>
+
+" Tab navigation
+nnoremap <D-]> gt
+nnoremap <D-[> gT
+
+set signcolumn=yes
+
+let g:gruvbox_material_background = 'hard'
+colorscheme gruvbox-material
+set bg=dark
