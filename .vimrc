@@ -17,6 +17,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-fugitive'
+Plug 'pantharshit00/vim-prisma'
 
 " Fern
 Plug 'lambdalisue/fern.vim'
