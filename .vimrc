@@ -1,8 +1,7 @@
 set nocompatible
 filetype off " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+" ============ Plugins ==============
 call plug#begin('~/.vim/plugged/')
 
 " GitHub Plugins:
@@ -14,6 +13,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-fugitive'
@@ -22,30 +22,26 @@ Plug 'pantharshit00/vim-prisma'
 " Fern
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-git-status.vim'
-Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'LumaKernel/fern-mapping-fzf.vim'
 Plug 'lambdalisue/fern-hijack.vim'
 
 " Language Server
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" All of your Plugins must be added before the following line
 call plug#end()
 
-" Coc
+" ============ End Plugins ==============
 
-
+" ============ Coc =============
 let g:coc_global_extensions = [ 'coc-tsserver', 'coc-json', 'coc-html', 'coc-eslint', 'coc-css', 'coc-markdownlint', 'coc-prisma', 'coc-sourcekit', 'coc-vimlsp', 'coc-sh', 'coc-html-css-support', 'coc-sql', 'coc-yaml' ]
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-"GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-"Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
@@ -58,6 +54,13 @@ function! s:show_documentation()
     endif
 endfunction
 
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>\<C-y>" : "\<TAB>"
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+
+" ============ End Coc =============
+
 filetype plugin on
 syntax on
 set expandtab
@@ -65,20 +68,20 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-" Fern Settings
+" ============== Fern =================
 let g:fern#renderer = "nerdfont"
-nnoremap <expr> <D-f> ":Fern . -drawer -toggle\<CR>"
+nnoremap <expr> <C-f> ":Fern . -drawer -toggle\<CR>"
+" ============== End Fern =================
 
-" fzf settings
+" ============== Fzf =================
 set wildignore+=*/.git/*,*/.idea/*,*/.DS_Store,*/node_modules/*,*/dist/*,*/ios/*,*/android/*
 let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")' : [ '<c-t>'], 'AcceptSelection("t")' : ['<cr>', '<2-LeftMouse>'], } " opens in new tab by default
 let g:ctrlp_root_markers = ['.ctrlp']
-let g:ctrlp_map = '<D-p>'
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6 } }
+nnoremap <D-p> :GFiles<CR>
+nnoremap <C-o> :GFiles<CR>
 
-inoremap <expr> <TAB> pumvisible() ? "\<C-n>\<C-y>" : "\<TAB>"
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+" ============== End Fzf =================
 
 " Markdown Syntax Folding - useful for outlining
 let g:markdown_folding = 1
@@ -99,6 +102,7 @@ let g:tq_enabled_backends=["merriam_webster", "mthesaur_txt"]
 let g:tq_cache_results=0
 
 nnoremap <D-d> :Goyo<CR>
+nnoremap <C-d> :Goyo<CR>
 nnoremap <leader>fs z=
 nnoremap <C-t> "=strftime('%F %T')<C-M>p
 inoremap <C-t> <C-R>=strftime('%F %T')<CR>
@@ -106,6 +110,8 @@ inoremap <C-t> <C-R>=strftime('%F %T')<CR>
 " Tab navigation
 nnoremap <D-]> gt
 nnoremap <D-[> gT
+nnoremap <C-]> gt
+nnoremap <C-[> gT
 
 set signcolumn=yes
 
