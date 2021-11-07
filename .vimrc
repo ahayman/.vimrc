@@ -5,19 +5,19 @@ filetype off " required
 call plug#begin('~/.vim/plugged/')
 
 " GitHub Plugins:
-Plug 'rafi/awesome-vim-colorschemes'
 Plug 'ahayman/thesaurus_query.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sainnhe/gruvbox-material'
+Plug 'lifepillar/vim-gruvbox8'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-fugitive'
 Plug 'pantharshit00/vim-prisma'
+Plug 'wincent/terminus'
 
 " Fern
 Plug 'lambdalisue/fern.vim'
@@ -55,9 +55,6 @@ function! s:show_documentation()
 endfunction
 
 inoremap <expr> <TAB> pumvisible() ? "\<C-n>\<C-y>" : "\<TAB>"
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 
 " ============ End Coc =============
 
@@ -69,7 +66,6 @@ set softtabstop=4
 set shiftwidth=4
 
 " ============== Fern =================
-let g:fern#renderer = "nerdfont"
 nnoremap <expr> <C-f> ":Fern . -drawer -toggle\<CR>"
 " ============== End Fern =================
 
@@ -101,20 +97,25 @@ let g:tq_merriam_webster_api_key='c65806b9-fb13-42ec-a16b-bd75c80c997a'
 let g:tq_enabled_backends=["merriam_webster", "mthesaur_txt"]
 let g:tq_cache_results=0
 
-nnoremap <D-d> :Goyo<CR>
-nnoremap <C-d> :Goyo<CR>
+nnoremap <C-g> :Goyo<CR>
 nnoremap <leader>fs z=
 nnoremap <C-t> "=strftime('%F %T')<C-M>p
 inoremap <C-t> <C-R>=strftime('%F %T')<CR>
 
 " Tab navigation
-nnoremap <D-]> gt
-nnoremap <D-[> gT
-nnoremap <C-]> gt
-nnoremap <C-[> gT
+" nnoremap <D-]> gt
+" nnoremap <D-[> gT
+nmap <C-k> gt
+nmap <C-j> gT
 
 set signcolumn=yes
 
+let g:gruvbox_material_palette='original'
 let g:gruvbox_material_background = 'hard'
-colorscheme gruvbox-material
-set bg=dark
+set background=dark
+if has("gui_running")
+    colorscheme gruvbox-material
+else
+    colorscheme gruvbox8_hard
+endif
+
