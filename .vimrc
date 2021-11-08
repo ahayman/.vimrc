@@ -78,8 +78,6 @@ inoremap <expr> <TAB> pumvisible() ? "\<C-n>\<C-y>" : "\<TAB>"
 nnoremap <expr> <C-f> ":Fern . -drawer -toggle\<CR>"
 
 " ============== Fzf =================
-set wildignore+=*/.git/*,*/.idea/*,*/.DS_Store,*/node_modules/*,*/dist/*,*/ios/*,*/android/*
-" let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")' : [ '<c-t>'], 'AcceptSelection("t")' : ['<cr>', '<2-LeftMouse>'], } " opens in new tab by default
 let g:ctrlp_root_markers = ['.ctrlp']
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6 } }
 nnoremap <C-o> :GFiles<CR>
