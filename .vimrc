@@ -5,6 +5,7 @@ filetype off " required
 call plug#begin('~/.vim/plugged/')
 
 " GitHub Plugins:
+" Plug 'rafi/awesome-vim-colorschemes'
 Plug 'ahayman/thesaurus_query.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'vim-airline/vim-airline'
@@ -71,7 +72,7 @@ nnoremap <expr> <C-f> ":Fern . -drawer -toggle\<CR>"
 
 " ============== Fzf =================
 set wildignore+=*/.git/*,*/.idea/*,*/.DS_Store,*/node_modules/*,*/dist/*,*/ios/*,*/android/*
-let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")' : [ '<c-t>'], 'AcceptSelection("t")' : ['<cr>', '<2-LeftMouse>'], } " opens in new tab by default
+" let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")' : [ '<c-t>'], 'AcceptSelection("t")' : ['<cr>', '<2-LeftMouse>'], } " opens in new tab by default
 let g:ctrlp_root_markers = ['.ctrlp']
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6 } }
 nnoremap <D-p> :GFiles<CR>
@@ -102,20 +103,22 @@ nnoremap <leader>fs z=
 nnoremap <C-t> "=strftime('%F %T')<C-M>p
 inoremap <C-t> <C-R>=strftime('%F %T')<CR>
 
-" Tab navigation
-" nnoremap <D-]> gt
-" nnoremap <D-[> gT
-nmap <C-k> gt
-nmap <C-j> gT
+" Buffer navigation
+nmap <C-k> :bnext<CR>
+nmap <C-j> :bprev<CR>
+set hidden
+
+" Tab Navigation
+nmap <C-n> gt
+nmap <C-p> gT
 
 set signcolumn=yes
 
 let g:gruvbox_material_palette='original'
 let g:gruvbox_material_background = 'hard'
-set background=dark
 if has("gui_running")
     colorscheme gruvbox-material
 else
     colorscheme gruvbox8_hard
 endif
-
+set background=dark
